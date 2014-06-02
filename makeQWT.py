@@ -6,7 +6,7 @@
 import string, os
 
 def makeQWT():
-	edit = '#Edited By: #Daryl W. Bennett --kd8bny@gmail.com \n#QWT5 support added using makeQWT V1 R0 \n\n'
+	edit = '#Edited By: #Daryl W. Bennett --kd8bny@gmail.com \n#QWT5 support added using makeQWT V1 R1 \n\n'
 	QWT = 'from PyQt4.Qwt5 import * \n'
 	print "\nmakeQWT V1 loading QT file\n"
 	temp = open('main.py', 'r+')
@@ -14,11 +14,12 @@ def makeQWT():
 	lines.insert(9,edit)
 	lines.insert(11,QWT)
 	temp.seek(0)
+	temp.writelines(lines)
 	print "\nWriting QWT5 import line\n"
 	# Remove old crap
-	start = len(lines)-14
-	temp.seek(start)
-	del lines[start:start+4]
+	end = len(lines)-14
+	temp.seek(end)
+	del lines[end:end+4]
 	temp.writelines(lines)
 	temp.close()
 
