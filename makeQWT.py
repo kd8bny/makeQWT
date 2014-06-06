@@ -20,6 +20,7 @@ def makeQWT():
 	end = len(lines)-14
 	temp.seek(end)
 	del lines[end:end+4]
+	temp.seek(0)
 	temp.writelines(lines)
 	temp.close()
 
