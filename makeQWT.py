@@ -13,13 +13,14 @@ def makeQWT():
 	lines = temp.readlines()
 	lines.insert(9,edit)
 	lines.insert(11,QWT)
-	temp.seek(0)
-	temp.writelines(lines)
+	#temp.seek(0)
+	#temp.writelines(lines)
 	print "\nWriting QWT5 import line\n"
 	# Remove old crap
-	end = len(lines)-14
-	temp.seek(end)
-	del lines[end:end+4]
+	end = len(lines)
+	ifFunc = lines[end-9:end]
+	del lines[end-14:end]
+	lines.insert(len(lines),"#Removed")
 	temp.seek(0)
 	temp.writelines(lines)
 	temp.close()
