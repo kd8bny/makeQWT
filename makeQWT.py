@@ -2,26 +2,25 @@
 #Allow the edit of QT Designer files for QWT support
 #TODO: Custom UI input
 
-#V1 R1
-import string, os
+#V1
+import string, os, shutil
 
 def makeQWT():
 	edit = '#Edited By: #Daryl W. Bennett --kd8bny@gmail.com \n#QWT5 support added using makeQWT V1 R1 \n\n'
 	QWT = 'from PyQt4.Qwt5 import * \n'
 	print "\nmakeQWT V1 loading QT file\n"
-	temp = open('libs/main.py', 'r+')
+	shutil.copyfile('../libs/main.py','../libs/main_old.py')
+	temp = open('../libs/main_old.py', 'r+')
 	lines = temp.readlines()
 	lines.insert(9,edit)
 	lines.insert(11,QWT)
-	#temp.seek(0)
-	#temp.writelines(lines)
 	print "\nWriting QWT5 import line\n"
 	# Remove old crap
 	end = len(lines)
-	ifFunc = lines[end-9:end]
-	del lines[end-14:end]
-	lines.insert(len(lines),"#Removed")
-	temp.seek(0)
+	del lines[end-13:end-10]
+	temp.close()
+
+	temp = open('../libs/main.py', 'r+')
 	temp.writelines(lines)
 	temp.close()
 
